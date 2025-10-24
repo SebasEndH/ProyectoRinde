@@ -1,0 +1,133 @@
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="navbar-principal">
+  <div class="container">
+      <a class="navbar-brand" th:href="@{/}">Rinde</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#menuNav">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menuNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" th:href="@{/}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/herramienta/pomodoro}">Herramienta</a></li>
+          <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#defaultModal">Tus estadísticas</a></li>
+
+          <!-- Selector de música en la barra -->
+          <li class="nav-item ms-2">
+          <select id="musicSelect" class="form-select form-select-sm">
+            <option value="">Seleccionar música</option>
+            <option value="https://youtu.be/GkyOOGANtgg?list=RDGkyOOGANtgg">Blues</option>
+            <option value="https://www.youtube.com/watch?v=qzyl0f3mRG0">Jazz Relax</option>
+            <option value="https://youtu.be/TmpdoZNqQuU">Clásica</option>
+            <option value="https://www.youtube.com/watch?v=SnUBb-FAlCY">Naturaleza</option>
+            <option value="https://www.youtube.com/watch?v=DUnDkI7l9LQ&list=RDDUnDkI7l9LQ&start_radio=1">Epiphany</option>
+          </select>
+        </li>
+
+        <!-- Botón de control -->
+        <li class="nav-item ms-2">
+          <button id="toggleMusic" class="btn btn-outline-light btn-sm">
+            <i id="icon" class="bi bi-volume-up"></i>
+          </button>
+        </li>
+
+        <!-- Zona login: si hay usuario mostrar nombre y logout, si no abrir modal -->
+        <li class="nav-item ms-2" th:if="${usuario != null}">
+          <span class="btn btn-outline-light ms-2" th:text="${usuario}"></span>
+        </li>
+        <li class="nav-item ms-1" th:if="${usuario != null}">
+          <a class="btn btn-secondary ms-1" th:href="@{/logout}">Salir</a>
+        </li>
+
+        <li class="nav-item" th:unless="${usuario != null}">
+            <a id="loginBtn" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a>
+        </li>
+      </ul>
+      </div>
+  </div>
+    <div id="ytplayer" style="width:0;height:0;overflow:hidden;"></div>
+</nav>
+
+<!-- Modal de login -->
+<div class="modal fade" id="loginModal" tabindex="-1" th:fragment="navbar-principal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inicie Sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" method="post" th:action="@{/login}">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo</label>
+                        <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                class="form-control"
+                                required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control"
+                                required
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        Enviar
+                    </button>
+                </form>
+            </div>
+            <div class="px-3 pb-3">
+                <p>¿No tiene cuenta?</p>
+                <!-- botón ahora es type="button" y tiene id para control por JS -->
+                <button id="registroBtn" type="button" class="btn btn-success w-100">Registrarse</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal de registro -->
+<div class="modal fade" id="registerModal" tabindex="-1"  th:fragment="navbar-principal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registro de Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- muestra el mensaje de error de registro si existe -->
+                <div th:if="${registroError}" class="alert alert-danger" th:text="${registroError}"></div>
+
+                <form id="registerForm" method="post" th:action="@{/registro}">
+
+                    <div class="mb-3">
+                        <label for="nombreReg" class="form-label">Nombre</label>
+                        <input type="text" id="nombreReg" name="nombre" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailReg" class="form-label">Correo</label>
+                        <input type="email" id="emailReg" name="email" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordReg" class="form-label">Contraseña</label>
+                        <input type="password" id="passwordReg" name="password" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Registrar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="backToLoginBtn" class="btn btn-link">Volver a iniciar sesión</button>
+            </div>
+        </div>
+    </div>
+</div>

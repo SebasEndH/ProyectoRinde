@@ -1,0 +1,12 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#timer {
+  font-size: 3rem;
+  color: #212529;
+}
+
+.card {
+  border-radius: 1rem;
+}
