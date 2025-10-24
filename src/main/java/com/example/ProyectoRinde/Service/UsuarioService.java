@@ -1,8 +1,8 @@
 package com.example.ProyectoRinde.Service;
 
-import com.example.ProyectoRinde.DTO.UsuarioDTO;
 import com.example.ProyectoRinde.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.ProyectoRinde.Model.Usuario;
@@ -12,19 +12,27 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public boolean existeUsuarioConEmail(String email) {
         return usuarioRepository.existsByEmail(email);
     }
 
     public Usuario autenticar(String email, String password) {
-        return usuarioRepository.findByEmailAndPassword(email, password);
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario != null && passwordEncoder.matches(password, usuario.getPassword())) {
+            return usuario;
+        }
+        return null;
     }
 
     public void registrar(Usuario usuario) {
         if (existeUsuarioConEmail(usuario.getEmail())) {
             throw new RuntimeException("El correo electrónico ya está registrado");
         } else {
+            String pass = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(pass);
             usuarioRepository.save(usuario);
         }
     }
