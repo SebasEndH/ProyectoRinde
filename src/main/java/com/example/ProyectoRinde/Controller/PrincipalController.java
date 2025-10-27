@@ -26,15 +26,6 @@ public class PrincipalController {
         return "herramienta/pomodoro";
     }
 
-    // GetMapping para la vista de la herramienta de lista de tareas
-    /*@GetMapping("/tareas/tareas")
-    public String listaTareas(Model model, HttpSession session) {
-        Object u = session.getAttribute("usuario");
-        if (u != null) model.addAttribute("usuario", u.toString());
-        return "tareas/tareas";
-    }*/
-
-
 }
 
 

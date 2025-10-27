@@ -13,7 +13,7 @@
       <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" th:href="@{/}">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" th:href="@{/herramienta/pomodoro}">Herramienta</a></li>
-          <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#defaultModal">Tus estadísticas</a></li>
+          <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#prox">Tus estadísticas</a></li>
 
           <!-- Selector de música en la barra -->
           <li class="nav-item ms-2">
@@ -82,7 +82,7 @@
                         />
                     </div>
                     <button type="submit" class="btn btn-primary w-100">
-                        Enviar
+                        Ingresar
                     </button>
                 </form>
             </div>
@@ -127,6 +127,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="backToLoginBtn" class="btn btn-link">Volver a iniciar sesión</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Generame un modal que abra al pulsar "Estadísticas", que diga que estará disponible próximamente-->
+<div class="modal fade" id="prox" tabindex="-1"  th:fragment="navbar-principal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Próximamente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>¡Las estadísticas estarán disponibles próximamente! Estamos trabajando para ofrecerte una mejor experiencia.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

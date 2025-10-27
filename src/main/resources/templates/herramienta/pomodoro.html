@@ -38,31 +38,6 @@
     </div>
   </main>
 
-<!-- Modal de login -->
-<div class="modal fade" id="loginModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Inicie Sesión</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo</label>
-                        <input type="text" id="email" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" id="password" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Enviar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
   <div th:if="${loginError}" class="container position-absolute" style="top:80px; left:50%; transform:translateX(-50%); z-index:1050;">
       <div class="alert alert-danger mb-0" th:text="${loginError}"></div>
   </div>
@@ -80,5 +55,4 @@
   <script th:src="@{/JS/script.js}"></script>
 
 </body>
-</html>
 </html>
